@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration status="WARN" monitorInterval="30">
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n</property>
+        <!-- 日志文件存储路径 -->
+        <!--<property name="LOG_HOME">D:/qhdserver_logs</property>-->
+        <property name="LOG_HOME">logs</property>
+        <!-- 日志 INFO 存储位置 -->
+        <property name="LOG_INFO">info/log-info.log</property>
+        <!-- 日志 EEEOR 存储位置 -->
+        <property name="LOG_ERROR">error/log-error.log</property>
+    </properties>
+    <appenders>
+        <console name="CONSOLE" target="system_out">
+            <patternLayout pattern="${PATTERN}" />
+        </console>
+        <!-- INFO 日志格式 -->
+        <rollingFile name="RollingFileInfo" fileName="${LOG_HOME}/${LOG_INFO}"
+                     filePattern="${LOG_HOME}/${LOG_INFO}.%d{yyyy-MM-dd}-%i" append="true" immediateFlush="true">
+            <filters>
+                <thresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </filters>
+            <patternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
+            </patternLayout>
+            <policies>
+                <timeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <sizeBasedTriggeringPolicy size="500 MB"/>
+            </policies>
+        </rollingFile>
+        <!-- ERROR 日志格式 -->
+        <rollingFile name="RollingFileError" fileName="${LOG_HOME}/${LOG_ERROR}"
+                     filePattern="${LOG_HOME}/${LOG_ERROR}.%d{yyyy-MM-dd}-%i" append="true" immediateFlush="true">
+            <thresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <patternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %class{36} %L %M - %msg%xEx%n</pattern>
+            </patternLayout>
+            <policies>
+                <timeBasedTriggeringPolicy />
+            </policies>
+        </rollingFile>
+    </appenders>
+    <loggers>
+        <logger name="com.ewater.drainsin.drain" level="info" additivity="false" includeLocation="true">
+            <appenderref ref="CONSOLE" />
+            <appenderref ref="RollingFileInfo"  />
+            <AppenderRef ref="RollingFileError" />
+        </logger>
+        <root level="INFO">
+            <appenderref ref="CONSOLE" />
+        </root>
+    </loggers>
+</configuration>

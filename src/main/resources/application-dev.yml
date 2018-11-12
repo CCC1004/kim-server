@@ -1,0 +1,18 @@
+#########################开发环境
+
+# Server 服务端相关配置
+server:
+  port: 8084
+  tomcat:
+    uri-encoding: UTF-8
+
+
+spring:
+  #  mysql数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kimsohyun?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: kim
+    password: kim
+
+

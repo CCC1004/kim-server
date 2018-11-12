@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    # 启动配置读取配置模式 dev 开发环境 || prod 生产环境
+    active: dev
+
+
+# log 配置地址
+logging:
+  config: classpath:log4j2.xml
