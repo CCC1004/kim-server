@@ -1,6 +1,11 @@
 package com.superc.kimserver.domain;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,25 +14,32 @@ import java.util.Date;
  * @Author: superC
  * @Date: 2018/11/11 20:05
  */
-public class UserInfo {
+@Entity(name = "user_info")
+public class UserInfo implements Serializable {
 
     /**
      * id
      */
-    private int id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
     /**
-     * 姓名
+     * 登录名
+     * nullable 是否能传入null值
+     * unique   约束唯一
      */
+    @Column(nullable = false, unique = true)
     private String username;
 
     /**
      * 密码
      */
+    @Column(nullable = false)
     private String password;
 
     /**
-     * 登录名
+     * 姓名
      */
     private String realname;
 
@@ -84,11 +96,11 @@ public class UserInfo {
 
     private Date ts;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -203,4 +215,30 @@ public class UserInfo {
     public void setTs(Date ts) {
         this.ts = ts;
     }
+
+    public UserInfo() {
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", realname='" + realname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", job='" + job + '\'' +
+                ", facelImage='" + facelImage + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", address='" + address + '\'' +
+                ", openid='" + openid + '\'' +
+                ", bn='" + bn + '\'' +
+                ", ts=" + ts +
+                '}';
+    }
+
+
 }

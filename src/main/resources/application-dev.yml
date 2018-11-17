@@ -14,5 +14,21 @@ spring:
     url: jdbc:mysql://localhost:3306/kimsohyun?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: kim
     password: kim
+    #   使用阿里巴巴的 druid 数据源
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      stat-view-servlet.allow: true
 
+  # jpa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.superc.kimserver.domain
+  mapper-locations: classpath:mapper/*.xml

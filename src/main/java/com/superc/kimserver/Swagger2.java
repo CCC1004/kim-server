@@ -10,7 +10,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
+/**
+ * Swagger配置类
+ *      用@Configuration注解该类，等价于XML中配置beans；用@Bean标注方法等价于XML中配置bean。
+ *      加上注解@EnableSwagger2 表示开启Swagger
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2 {
@@ -33,4 +37,5 @@ public class Swagger2 {
                 .build();
     }
 }
+
 
