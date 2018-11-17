@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.superc.kimserver.dao.KimIndexJptjDAO">
+  <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimIndexJptj">
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="jp_name" jdbcType="VARCHAR" property="jpName" />
+    <result column="jp_image" jdbcType="VARCHAR" property="jpImage" />
+    <result column="jp_desc" jdbcType="VARCHAR" property="jpDesc" />
+    <result column="jp_sort" jdbcType="VARCHAR" property="jpSort" />
+    <result column="nt" jdbcType="VARCHAR" property="nt" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    guid, jp_name, jp_image, jp_desc, jp_sort, nt, ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kim_index_jptj
+    where guid = #{guid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kim_index_jptj
+    where guid = #{guid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.superc.kimserver.domain.KimIndexJptj">
+    insert into kim_index_jptj (guid, jp_name, jp_image, 
+      jp_desc, jp_sort, nt, 
+      ts)
+    values (#{guid,jdbcType=VARCHAR}, #{jpName,jdbcType=VARCHAR}, #{jpImage,jdbcType=VARCHAR}, 
+      #{jpDesc,jdbcType=VARCHAR}, #{jpSort,jdbcType=VARCHAR}, #{nt,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.superc.kimserver.domain.KimIndexJptj">
+    insert into kim_index_jptj
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="jpName != null">
+        jp_name,
+      </if>
+      <if test="jpImage != null">
+        jp_image,
+      </if>
+      <if test="jpDesc != null">
+        jp_desc,
+      </if>
+      <if test="jpSort != null">
+        jp_sort,
+      </if>
+      <if test="nt != null">
+        nt,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="jpName != null">
+        #{jpName,jdbcType=VARCHAR},
+      </if>
+      <if test="jpImage != null">
+        #{jpImage,jdbcType=VARCHAR},
+      </if>
+      <if test="jpDesc != null">
+        #{jpDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="jpSort != null">
+        #{jpSort,jdbcType=VARCHAR},
+      </if>
+      <if test="nt != null">
+        #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.superc.kimserver.domain.KimIndexJptj">
+    update kim_index_jptj
+    <set>
+      <if test="jpName != null">
+        jp_name = #{jpName,jdbcType=VARCHAR},
+      </if>
+      <if test="jpImage != null">
+        jp_image = #{jpImage,jdbcType=VARCHAR},
+      </if>
+      <if test="jpDesc != null">
+        jp_desc = #{jpDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="jpSort != null">
+        jp_sort = #{jpSort,jdbcType=VARCHAR},
+      </if>
+      <if test="nt != null">
+        nt = #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.superc.kimserver.domain.KimIndexJptj">
+    update kim_index_jptj
+    set jp_name = #{jpName,jdbcType=VARCHAR},
+      jp_image = #{jpImage,jdbcType=VARCHAR},
+      jp_desc = #{jpDesc,jdbcType=VARCHAR},
+      jp_sort = #{jpSort,jdbcType=VARCHAR},
+      nt = #{nt,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.superc.kimserver.dao.KimResourcesDAO">
+  <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimResources">
+    <id column="FILE_CD" jdbcType="CHAR" property="fileCd" />
+    <result column="FILE_TITL" jdbcType="VARCHAR" property="fileTitl" />
+    <result column="KEY_WORD" jdbcType="VARCHAR" property="keyWord" />
+    <result column="EST_ORG" jdbcType="VARCHAR" property="estOrg" />
+    <result column="ORGCD" jdbcType="CHAR" property="orgcd" />
+    <result column="EST_PERS" jdbcType="VARCHAR" property="estPers" />
+    <result column="EST_DT" jdbcType="DATE" property="estDt" />
+    <result column="PUB_ORG" jdbcType="VARCHAR" property="pubOrg" />
+    <result column="PUB_ORGCD" jdbcType="CHAR" property="pubOrgcd" />
+    <result column="PUB_DT" jdbcType="DATE" property="pubDt" />
+    <result column="ABS" jdbcType="VARCHAR" property="abs" />
+    <result column="MUL_TP" jdbcType="CHAR" property="mulTp" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="FILE_NM" jdbcType="VARCHAR" property="fileNm" />
+    <result column="FILE_SIZE" jdbcType="DECIMAL" property="fileSize" />
+    <result column="FILE_EXT" jdbcType="VARCHAR" property="fileExt" />
+    <result column="IS_SEC" jdbcType="BIT" property="isSec" />
+    <result column="SEC_G" jdbcType="CHAR" property="secG" />
+    <result column="DOC_TP" jdbcType="CHAR" property="docTp" />
+    <result column="TS" jdbcType="TIMESTAMP" property="ts" />
+    <result column="NT" jdbcType="VARCHAR" property="nt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FILE_CD, FILE_TITL, KEY_WORD, EST_ORG, ORGCD, EST_PERS, EST_DT, PUB_ORG, PUB_ORGCD, 
+    PUB_DT, `ABS`, MUL_TP, FILE_PATH, FILE_NM, FILE_SIZE, FILE_EXT, IS_SEC, SEC_G, DOC_TP, 
+    TS, NT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kim_resources
+    where FILE_CD = #{fileCd,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kim_resources
+    where FILE_CD = #{fileCd,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.superc.kimserver.domain.KimResources">
+    insert into kim_resources (FILE_CD, FILE_TITL, KEY_WORD, 
+      EST_ORG, ORGCD, EST_PERS, 
+      EST_DT, PUB_ORG, PUB_ORGCD, 
+      PUB_DT, `ABS`, MUL_TP, FILE_PATH, 
+      FILE_NM, FILE_SIZE, FILE_EXT, 
+      IS_SEC, SEC_G, DOC_TP, TS, 
+      NT)
+    values (#{fileCd,jdbcType=CHAR}, #{fileTitl,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, 
+      #{estOrg,jdbcType=VARCHAR}, #{orgcd,jdbcType=CHAR}, #{estPers,jdbcType=VARCHAR}, 
+      #{estDt,jdbcType=DATE}, #{pubOrg,jdbcType=VARCHAR}, #{pubOrgcd,jdbcType=CHAR}, 
+      #{pubDt,jdbcType=DATE}, #{abs,jdbcType=VARCHAR}, #{mulTp,jdbcType=CHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{fileNm,jdbcType=VARCHAR}, #{fileSize,jdbcType=DECIMAL}, #{fileExt,jdbcType=VARCHAR}, 
+      #{isSec,jdbcType=BIT}, #{secG,jdbcType=CHAR}, #{docTp,jdbcType=CHAR}, #{ts,jdbcType=TIMESTAMP}, 
+      #{nt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.superc.kimserver.domain.KimResources">
+    insert into kim_resources
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileCd != null">
+        FILE_CD,
+      </if>
+      <if test="fileTitl != null">
+        FILE_TITL,
+      </if>
+      <if test="keyWord != null">
+        KEY_WORD,
+      </if>
+      <if test="estOrg != null">
+        EST_ORG,
+      </if>
+      <if test="orgcd != null">
+        ORGCD,
+      </if>
+      <if test="estPers != null">
+        EST_PERS,
+      </if>
+      <if test="estDt != null">
+        EST_DT,
+      </if>
+      <if test="pubOrg != null">
+        PUB_ORG,
+      </if>
+      <if test="pubOrgcd != null">
+        PUB_ORGCD,
+      </if>
+      <if test="pubDt != null">
+        PUB_DT,
+      </if>
+      <if test="abs != null">
+        `ABS`,
+      </if>
+      <if test="mulTp != null">
+        MUL_TP,
+      </if>
+      <if test="filePath != null">
+        FILE_PATH,
+      </if>
+      <if test="fileNm != null">
+        FILE_NM,
+      </if>
+      <if test="fileSize != null">
+        FILE_SIZE,
+      </if>
+      <if test="fileExt != null">
+        FILE_EXT,
+      </if>
+      <if test="isSec != null">
+        IS_SEC,
+      </if>
+      <if test="secG != null">
+        SEC_G,
+      </if>
+      <if test="docTp != null">
+        DOC_TP,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="nt != null">
+        NT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileCd != null">
+        #{fileCd,jdbcType=CHAR},
+      </if>
+      <if test="fileTitl != null">
+        #{fileTitl,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null">
+        #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="estOrg != null">
+        #{estOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcd != null">
+        #{orgcd,jdbcType=CHAR},
+      </if>
+      <if test="estPers != null">
+        #{estPers,jdbcType=VARCHAR},
+      </if>
+      <if test="estDt != null">
+        #{estDt,jdbcType=DATE},
+      </if>
+      <if test="pubOrg != null">
+        #{pubOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pubOrgcd != null">
+        #{pubOrgcd,jdbcType=CHAR},
+      </if>
+      <if test="pubDt != null">
+        #{pubDt,jdbcType=DATE},
+      </if>
+      <if test="abs != null">
+        #{abs,jdbcType=VARCHAR},
+      </if>
+      <if test="mulTp != null">
+        #{mulTp,jdbcType=CHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNm != null">
+        #{fileNm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=DECIMAL},
+      </if>
+      <if test="fileExt != null">
+        #{fileExt,jdbcType=VARCHAR},
+      </if>
+      <if test="isSec != null">
+        #{isSec,jdbcType=BIT},
+      </if>
+      <if test="secG != null">
+        #{secG,jdbcType=CHAR},
+      </if>
+      <if test="docTp != null">
+        #{docTp,jdbcType=CHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nt != null">
+        #{nt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.superc.kimserver.domain.KimResources">
+    update kim_resources
+    <set>
+      <if test="fileTitl != null">
+        FILE_TITL = #{fileTitl,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null">
+        KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="estOrg != null">
+        EST_ORG = #{estOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcd != null">
+        ORGCD = #{orgcd,jdbcType=CHAR},
+      </if>
+      <if test="estPers != null">
+        EST_PERS = #{estPers,jdbcType=VARCHAR},
+      </if>
+      <if test="estDt != null">
+        EST_DT = #{estDt,jdbcType=DATE},
+      </if>
+      <if test="pubOrg != null">
+        PUB_ORG = #{pubOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pubOrgcd != null">
+        PUB_ORGCD = #{pubOrgcd,jdbcType=CHAR},
+      </if>
+      <if test="pubDt != null">
+        PUB_DT = #{pubDt,jdbcType=DATE},
+      </if>
+      <if test="abs != null">
+        `ABS` = #{abs,jdbcType=VARCHAR},
+      </if>
+      <if test="mulTp != null">
+        MUL_TP = #{mulTp,jdbcType=CHAR},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNm != null">
+        FILE_NM = #{fileNm,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+      </if>
+      <if test="fileExt != null">
+        FILE_EXT = #{fileExt,jdbcType=VARCHAR},
+      </if>
+      <if test="isSec != null">
+        IS_SEC = #{isSec,jdbcType=BIT},
+      </if>
+      <if test="secG != null">
+        SEC_G = #{secG,jdbcType=CHAR},
+      </if>
+      <if test="docTp != null">
+        DOC_TP = #{docTp,jdbcType=CHAR},
+      </if>
+      <if test="ts != null">
+        TS = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nt != null">
+        NT = #{nt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILE_CD = #{fileCd,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.superc.kimserver.domain.KimResources">
+    update kim_resources
+    set FILE_TITL = #{fileTitl,jdbcType=VARCHAR},
+      KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      EST_ORG = #{estOrg,jdbcType=VARCHAR},
+      ORGCD = #{orgcd,jdbcType=CHAR},
+      EST_PERS = #{estPers,jdbcType=VARCHAR},
+      EST_DT = #{estDt,jdbcType=DATE},
+      PUB_ORG = #{pubOrg,jdbcType=VARCHAR},
+      PUB_ORGCD = #{pubOrgcd,jdbcType=CHAR},
+      PUB_DT = #{pubDt,jdbcType=DATE},
+      `ABS` = #{abs,jdbcType=VARCHAR},
+      MUL_TP = #{mulTp,jdbcType=CHAR},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      FILE_NM = #{fileNm,jdbcType=VARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+      FILE_EXT = #{fileExt,jdbcType=VARCHAR},
+      IS_SEC = #{isSec,jdbcType=BIT},
+      SEC_G = #{secG,jdbcType=CHAR},
+      DOC_TP = #{docTp,jdbcType=CHAR},
+      TS = #{ts,jdbcType=TIMESTAMP},
+      NT = #{nt,jdbcType=VARCHAR}
+    where FILE_CD = #{fileCd,jdbcType=CHAR}
+  </update>
+</mapper>

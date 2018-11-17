@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.superc.kimserver.dao.KimIndexRmtpDAO">
+  <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimIndexRmtp">
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="rm_name" jdbcType="VARCHAR" property="rmName" />
+    <result column="rm_image" jdbcType="VARCHAR" property="rmImage" />
+    <result column="rm_head_img" jdbcType="VARCHAR" property="rmHeadImg" />
+    <result column="rm_title" jdbcType="VARCHAR" property="rmTitle" />
+    <result column="rm_context" jdbcType="VARCHAR" property="rmContext" />
+    <result column="rm_sort" jdbcType="VARCHAR" property="rmSort" />
+    <result column="nt" jdbcType="VARCHAR" property="nt" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, nt, ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kim_index_rmtp
+    where guid = #{guid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kim_index_rmtp
+    where guid = #{guid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.superc.kimserver.domain.KimIndexRmtp">
+    insert into kim_index_rmtp (guid, rm_name, rm_image, 
+      rm_head_img, rm_title, rm_context, 
+      rm_sort, nt, ts)
+    values (#{guid,jdbcType=VARCHAR}, #{rmName,jdbcType=VARCHAR}, #{rmImage,jdbcType=VARCHAR}, 
+      #{rmHeadImg,jdbcType=VARCHAR}, #{rmTitle,jdbcType=VARCHAR}, #{rmContext,jdbcType=VARCHAR}, 
+      #{rmSort,jdbcType=VARCHAR}, #{nt,jdbcType=VARCHAR}, #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.superc.kimserver.domain.KimIndexRmtp">
+    insert into kim_index_rmtp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="rmName != null">
+        rm_name,
+      </if>
+      <if test="rmImage != null">
+        rm_image,
+      </if>
+      <if test="rmHeadImg != null">
+        rm_head_img,
+      </if>
+      <if test="rmTitle != null">
+        rm_title,
+      </if>
+      <if test="rmContext != null">
+        rm_context,
+      </if>
+      <if test="rmSort != null">
+        rm_sort,
+      </if>
+      <if test="nt != null">
+        nt,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="rmName != null">
+        #{rmName,jdbcType=VARCHAR},
+      </if>
+      <if test="rmImage != null">
+        #{rmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rmHeadImg != null">
+        #{rmHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="rmTitle != null">
+        #{rmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rmContext != null">
+        #{rmContext,jdbcType=VARCHAR},
+      </if>
+      <if test="rmSort != null">
+        #{rmSort,jdbcType=VARCHAR},
+      </if>
+      <if test="nt != null">
+        #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.superc.kimserver.domain.KimIndexRmtp">
+    update kim_index_rmtp
+    <set>
+      <if test="rmName != null">
+        rm_name = #{rmName,jdbcType=VARCHAR},
+      </if>
+      <if test="rmImage != null">
+        rm_image = #{rmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="rmHeadImg != null">
+        rm_head_img = #{rmHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="rmTitle != null">
+        rm_title = #{rmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rmContext != null">
+        rm_context = #{rmContext,jdbcType=VARCHAR},
+      </if>
+      <if test="rmSort != null">
+        rm_sort = #{rmSort,jdbcType=VARCHAR},
+      </if>
+      <if test="nt != null">
+        nt = #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.superc.kimserver.domain.KimIndexRmtp">
+    update kim_index_rmtp
+    set rm_name = #{rmName,jdbcType=VARCHAR},
+      rm_image = #{rmImage,jdbcType=VARCHAR},
+      rm_head_img = #{rmHeadImg,jdbcType=VARCHAR},
+      rm_title = #{rmTitle,jdbcType=VARCHAR},
+      rm_context = #{rmContext,jdbcType=VARCHAR},
+      rm_sort = #{rmSort,jdbcType=VARCHAR},
+      nt = #{nt,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+</mapper>

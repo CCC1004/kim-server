@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.superc.kimserver.dao.KimIndexLbDAO">
+  
+  <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimIndexLb">
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="lb_name" jdbcType="VARCHAR" property="lbName" />
+    <result column="lb_sort" jdbcType="VARCHAR" property="lbSort" />
+    <association property="kimResources" javaType="com.superc.kimserver.domain.KimResources">
+      <id column="FILE_CD" jdbcType="CHAR" property="fileCd" />
+      <result column="MUL_TP" jdbcType="CHAR" property="mulTp" />
+      <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+      <result column="FILE_NM" jdbcType="VARCHAR" property="fileNm" />
+      <result column="FILE_EXT" jdbcType="VARCHAR" property="fileExt" />
+     </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    guid, lb_name, lb_sort, FILE_CD, MUL_TP, FILE_PATH, FILE_NM, FILE_EXT
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kim_index_lb l join kim_resources r
+    where l.lb_image=r.FILE_CD
+    and l.guid = #{guid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kim_index_lb l join kim_resources r
+    where l.lb_image=r.FILE_CD
+    order by l.lb_sort asc
+  </select>
+
+</mapper>
