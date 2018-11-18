@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.superc.kimserver.dao.KimIndexRmtpDAO">
+
+  <resultMap id="BaseResultMap2" type="com.superc.kimserver.domain.KimIndexRmtp">
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="rm_name" jdbcType="VARCHAR" property="rmName" />
+    <result column="rm_image" jdbcType="VARCHAR" property="rmImage" />
+    <result column="rm_head_img" jdbcType="VARCHAR" property="rmHeadImg" />
+    <result column="rm_title" jdbcType="VARCHAR" property="rmTitle" />
+    <result column="rm_context" jdbcType="VARCHAR" property="rmContext" />
+    <result column="rm_sort" jdbcType="VARCHAR" property="rmSort" />
+    <association property="imgResources" javaType="com.superc.kimserver.domain.KimResources">
+      <id column="FILE_CD" jdbcType="CHAR" property="fileCd" />
+      <result column="MUL_TP" jdbcType="CHAR" property="mulTp" />
+      <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+      <result column="FILE_NM" jdbcType="VARCHAR" property="fileNm" />
+      <result column="FILE_EXT" jdbcType="VARCHAR" property="fileExt" />
+    </association>
+    <association property="headResources" javaType="com.superc.kimserver.domain.KimResources">
+      <id column="FILE_CD2" jdbcType="CHAR" property="fileCd" />
+      <result column="MUL_TP2" jdbcType="CHAR" property="mulTp" />
+      <result column="FILE_PATH2" jdbcType="VARCHAR" property="filePath" />
+      <result column="FILE_NM2" jdbcType="VARCHAR" property="fileNm" />
+      <result column="FILE_EXT2" jdbcType="VARCHAR" property="fileExt" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List2">
+    guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort,
+    img.FILE_CD, img.MUL_TP, img.FILE_PATH, img.FILE_NM, img.FILE_EXT,
+    head.FILE_CD FILE_CD2, head.MUL_TP MUL_TP2, head.FILE_PATH FILE_PATH2,
+    head.FILE_NM FILE_NM2, head.FILE_EXT FILE_EXT2
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap2">
+    select
+    <include refid="Base_Column_List2" />
+    from kim_index_rmtp rm
+    join kim_resources img on rm.rm_image=img.FILE_CD
+    join kim_resources head on rm.rm_head_img=head.FILE_CD
+    order by rm.rm_sort asc
+  </select>
+  <select id="selectByPrimaryKey2" parameterType="java.lang.String" resultMap="BaseResultMap2">
+    select 
+    <include refid="Base_Column_List2" />
+    from kim_index_rmtp rm left join kim_resources img on rm.rm_image=img.FILE_CD
+    left join kim_resources head on rm.rm_head_img=head.FILE_CD
+    where rm.guid = #{guid,jdbcType=VARCHAR}
+  </select>
+
+
   <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimIndexRmtp">
     <id column="guid" jdbcType="VARCHAR" property="guid" />
     <result column="rm_name" jdbcType="VARCHAR" property="rmName" />
@@ -16,7 +63,7 @@
     guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, nt, ts
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from kim_index_rmtp
     where guid = #{guid,jdbcType=VARCHAR}

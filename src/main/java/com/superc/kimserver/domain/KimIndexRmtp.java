@@ -2,6 +2,7 @@ package com.superc.kimserver.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * kim_index_rmtp
@@ -24,9 +25,23 @@ public class KimIndexRmtp implements Serializable {
     private String rmImage;
 
     /**
+     * kim_index_rmtp表中有一个lb_image字段，所以在KimIndexRmtp类中定义一个imgResources属性，
+     * 用于维护KimIndexRmtp和KimResources之间的一对一关系，
+     * 轮播图片id(与资源信息主键匹配)
+     */
+    private KimResources imgResources;
+
+    /**
      * 头像图片id(与资源信息主键匹配)
      */
     private String rmHeadImg;
+
+    /**
+     * kim_index_rmtp表中有一个lb_image字段，所以在KimIndexRmtp类中定义一个headResources属性，
+     * 用于维护KimIndexRmtp和KimResources之间的一对一关系，
+     * 轮播图片id(与资源信息主键匹配)
+     */
+    private KimResources headResources;
 
     /**
      * 标题
@@ -127,62 +142,63 @@ public class KimIndexRmtp implements Serializable {
         this.ts = ts;
     }
 
+    public KimResources getImgResources() {
+        return imgResources;
+    }
+
+    public void setImgResources(KimResources imgResources) {
+        this.imgResources = imgResources;
+    }
+
+    public KimResources getHeadResources() {
+        return headResources;
+    }
+
+    public void setHeadResources(KimResources headResources) {
+        this.headResources = headResources;
+    }
+
     @Override
-    public boolean equals(Object that) {
-        if (this == that) {
+    public boolean equals(Object o) {
+        if (this == o){
             return true;
         }
-        if (that == null) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        KimIndexRmtp other = (KimIndexRmtp) that;
-        return (this.getGuid() == null ? other.getGuid() == null : this.getGuid().equals(other.getGuid()))
-            && (this.getRmName() == null ? other.getRmName() == null : this.getRmName().equals(other.getRmName()))
-            && (this.getRmImage() == null ? other.getRmImage() == null : this.getRmImage().equals(other.getRmImage()))
-            && (this.getRmHeadImg() == null ? other.getRmHeadImg() == null : this.getRmHeadImg().equals(other.getRmHeadImg()))
-            && (this.getRmTitle() == null ? other.getRmTitle() == null : this.getRmTitle().equals(other.getRmTitle()))
-            && (this.getRmContext() == null ? other.getRmContext() == null : this.getRmContext().equals(other.getRmContext()))
-            && (this.getRmSort() == null ? other.getRmSort() == null : this.getRmSort().equals(other.getRmSort()))
-            && (this.getNt() == null ? other.getNt() == null : this.getNt().equals(other.getNt()))
-            && (this.getTs() == null ? other.getTs() == null : this.getTs().equals(other.getTs()));
+        KimIndexRmtp that = (KimIndexRmtp) o;
+        return Objects.equals(guid, that.guid) &&
+                Objects.equals(rmName, that.rmName) &&
+                Objects.equals(rmImage, that.rmImage) &&
+                Objects.equals(imgResources, that.imgResources) &&
+                Objects.equals(rmHeadImg, that.rmHeadImg) &&
+                Objects.equals(headResources, that.headResources) &&
+                Objects.equals(rmTitle, that.rmTitle) &&
+                Objects.equals(rmContext, that.rmContext) &&
+                Objects.equals(rmSort, that.rmSort) &&
+                Objects.equals(nt, that.nt) &&
+                Objects.equals(ts, that.ts);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getGuid() == null) ? 0 : getGuid().hashCode());
-        result = prime * result + ((getRmName() == null) ? 0 : getRmName().hashCode());
-        result = prime * result + ((getRmImage() == null) ? 0 : getRmImage().hashCode());
-        result = prime * result + ((getRmHeadImg() == null) ? 0 : getRmHeadImg().hashCode());
-        result = prime * result + ((getRmTitle() == null) ? 0 : getRmTitle().hashCode());
-        result = prime * result + ((getRmContext() == null) ? 0 : getRmContext().hashCode());
-        result = prime * result + ((getRmSort() == null) ? 0 : getRmSort().hashCode());
-        result = prime * result + ((getNt() == null) ? 0 : getNt().hashCode());
-        result = prime * result + ((getTs() == null) ? 0 : getTs().hashCode());
-        return result;
+        return Objects.hash(guid, rmName, rmImage, imgResources, rmHeadImg, headResources, rmTitle, rmContext, rmSort, nt, ts);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", guid=").append(guid);
-        sb.append(", rmName=").append(rmName);
-        sb.append(", rmImage=").append(rmImage);
-        sb.append(", rmHeadImg=").append(rmHeadImg);
-        sb.append(", rmTitle=").append(rmTitle);
-        sb.append(", rmContext=").append(rmContext);
-        sb.append(", rmSort=").append(rmSort);
-        sb.append(", nt=").append(nt);
-        sb.append(", ts=").append(ts);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "KimIndexRmtp{" +
+                "guid='" + guid + '\'' +
+                ", rmName='" + rmName + '\'' +
+                ", rmImage='" + rmImage + '\'' +
+                ", imgResources=" + imgResources +
+                ", rmHeadImg='" + rmHeadImg + '\'' +
+                ", headResources=" + headResources +
+                ", rmTitle='" + rmTitle + '\'' +
+                ", rmContext='" + rmContext + '\'' +
+                ", rmSort='" + rmSort + '\'' +
+                ", nt='" + nt + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }

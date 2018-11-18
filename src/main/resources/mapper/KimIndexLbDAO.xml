@@ -22,15 +22,15 @@
     select
     <include refid="Base_Column_List" />
     from kim_index_lb l join kim_resources r
-    where l.lb_image=r.FILE_CD
-    and l.guid = #{guid,jdbcType=VARCHAR}
+    on l.lb_image=r.FILE_CD
+    where l.guid = #{guid,jdbcType=VARCHAR}
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from kim_index_lb l join kim_resources r
-    where l.lb_image=r.FILE_CD
+    on l.lb_image=r.FILE_CD
     order by l.lb_sort asc
   </select>
 

@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.superc.kimserver.dao.KimIndexJptjDAO">
+
+  <resultMap id="BaseResultMap2" type="com.superc.kimserver.domain.KimIndexJptj">
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="jp_name" jdbcType="VARCHAR" property="jpName" />
+    <result column="jp_image" jdbcType="VARCHAR" property="jpImage" />
+    <result column="jp_desc" jdbcType="VARCHAR" property="jpDesc" />
+    <result column="jp_sort" jdbcType="VARCHAR" property="jpSort" />
+    <association property="kimResources" javaType="com.superc.kimserver.domain.KimResources">
+      <id column="FILE_CD" jdbcType="CHAR" property="fileCd" />
+      <result column="MUL_TP" jdbcType="CHAR" property="mulTp" />
+      <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+      <result column="FILE_NM" jdbcType="VARCHAR" property="fileNm" />
+      <result column="FILE_EXT" jdbcType="VARCHAR" property="fileExt" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List2">
+    guid, jp_name, jp_image, jp_desc, jp_sort, FILE_CD, MUL_TP, FILE_PATH, FILE_NM, FILE_EXT
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap2">
+    select
+    <include refid="Base_Column_List2" />
+    from kim_index_jptj j join kim_resources r
+    where j.jp_image=r.FILE_CD
+    order by j.jp_sort asc
+  </select>
+  <select id="selectAndResByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap2">
+    select
+    <include refid="Base_Column_List2" />
+    from kim_index_jptj j join kim_resources r
+    where where j.jp_image=r.FILE_CD
+    and j.guid = #{guid,jdbcType=VARCHAR}
+  </select>
+
+
   <resultMap id="BaseResultMap" type="com.superc.kimserver.domain.KimIndexJptj">
     <id column="guid" jdbcType="VARCHAR" property="guid" />
     <result column="jp_name" jdbcType="VARCHAR" property="jpName" />
@@ -14,7 +48,7 @@
     guid, jp_name, jp_image, jp_desc, jp_sort, nt, ts
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from kim_index_jptj
     where guid = #{guid,jdbcType=VARCHAR}

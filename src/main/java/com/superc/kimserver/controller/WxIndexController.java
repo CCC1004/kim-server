@@ -2,7 +2,9 @@ package com.superc.kimserver.controller;
 
 import com.superc.kimserver.common.JsonUtils;
 import com.superc.kimserver.common.ResultUtils;
+import com.superc.kimserver.domain.KimIndexJptj;
 import com.superc.kimserver.domain.KimIndexLb;
+import com.superc.kimserver.domain.KimIndexRmtp;
 import com.superc.kimserver.service.WxIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +49,43 @@ public class WxIndexController {
         }
         return result;
     }
+
+    /**
+     * 获取精品推荐列表
+     */
+    @ApiOperation(value="精品推荐列表", httpMethod="GET", notes="获取精品推荐列表",response=String.class)
+    @GetMapping("/getJptjList")
+    public ResultUtils getJptjList(){
+        ResultUtils result = new ResultUtils();
+        List<KimIndexJptj> list = wxIndexService.getJptjList();
+        logger.info(list.toString());
+
+        if(list!=null && list.size()>0){
+            result = ResultUtils.ok(list);
+        }else{
+            result = ResultUtils.errorMsg("数据为空");
+        }
+        return result;
+    }
+
+    /**
+     * 获取热门图片列表
+     */
+    @ApiOperation(value="热门图片列表", httpMethod="GET", notes="获取热门图片列表",response=String.class)
+    @GetMapping("/getRmtpList")
+    public ResultUtils getRmtpList(){
+        ResultUtils result = new ResultUtils();
+        List<KimIndexRmtp> list = wxIndexService.getRmtpList();
+        logger.info(list.toString());
+
+        if(list!=null && list.size()>0){
+            result = ResultUtils.ok(list);
+        }else{
+            result = ResultUtils.errorMsg("数据为空");
+        }
+        return result;
+    }
+
 
 
 

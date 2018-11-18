@@ -2,6 +2,7 @@ package com.superc.kimserver.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * kim_index_jptj
@@ -22,6 +23,13 @@ public class KimIndexJptj implements Serializable {
      * 精品图片id(与资源信息主键匹配)
      */
     private String jpImage;
+
+    /**
+     * kim_index_jptj表中有一个lb_image字段，所以在KimIndexJptj类中定义一个kimResources属性，
+     * 用于维护KimIndexJptj和KimResources之间的一对一关系，
+     * 轮播图片id(与资源信息主键匹配)
+     */
+    private KimResources kimResources;
 
     /**
      * 精品描述
@@ -101,56 +109,49 @@ public class KimIndexJptj implements Serializable {
         this.ts = ts;
     }
 
+    public KimResources getKimResources() {
+        return kimResources;
+    }
+
+    public void setKimResources(KimResources kimResources) {
+        this.kimResources = kimResources;
+    }
+
     @Override
-    public boolean equals(Object that) {
-        if (this == that) {
+    public boolean equals(Object o) {
+        if (this == o){
             return true;
         }
-        if (that == null) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        KimIndexJptj other = (KimIndexJptj) that;
-        return (this.getGuid() == null ? other.getGuid() == null : this.getGuid().equals(other.getGuid()))
-            && (this.getJpName() == null ? other.getJpName() == null : this.getJpName().equals(other.getJpName()))
-            && (this.getJpImage() == null ? other.getJpImage() == null : this.getJpImage().equals(other.getJpImage()))
-            && (this.getJpDesc() == null ? other.getJpDesc() == null : this.getJpDesc().equals(other.getJpDesc()))
-            && (this.getJpSort() == null ? other.getJpSort() == null : this.getJpSort().equals(other.getJpSort()))
-            && (this.getNt() == null ? other.getNt() == null : this.getNt().equals(other.getNt()))
-            && (this.getTs() == null ? other.getTs() == null : this.getTs().equals(other.getTs()));
+        KimIndexJptj that = (KimIndexJptj) o;
+        return Objects.equals(guid, that.guid) &&
+                Objects.equals(jpName, that.jpName) &&
+                Objects.equals(jpImage, that.jpImage) &&
+                Objects.equals(kimResources, that.kimResources) &&
+                Objects.equals(jpDesc, that.jpDesc) &&
+                Objects.equals(jpSort, that.jpSort) &&
+                Objects.equals(nt, that.nt) &&
+                Objects.equals(ts, that.ts);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getGuid() == null) ? 0 : getGuid().hashCode());
-        result = prime * result + ((getJpName() == null) ? 0 : getJpName().hashCode());
-        result = prime * result + ((getJpImage() == null) ? 0 : getJpImage().hashCode());
-        result = prime * result + ((getJpDesc() == null) ? 0 : getJpDesc().hashCode());
-        result = prime * result + ((getJpSort() == null) ? 0 : getJpSort().hashCode());
-        result = prime * result + ((getNt() == null) ? 0 : getNt().hashCode());
-        result = prime * result + ((getTs() == null) ? 0 : getTs().hashCode());
-        return result;
+        return Objects.hash(guid, jpName, jpImage, kimResources, jpDesc, jpSort, nt, ts);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", guid=").append(guid);
-        sb.append(", jpName=").append(jpName);
-        sb.append(", jpImage=").append(jpImage);
-        sb.append(", jpDesc=").append(jpDesc);
-        sb.append(", jpSort=").append(jpSort);
-        sb.append(", nt=").append(nt);
-        sb.append(", ts=").append(ts);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "KimIndexJptj{" +
+                "guid='" + guid + '\'' +
+                ", jpName='" + jpName + '\'' +
+                ", jpImage='" + jpImage + '\'' +
+                ", kimResources=" + kimResources +
+                ", jpDesc='" + jpDesc + '\'' +
+                ", jpSort='" + jpSort + '\'' +
+                ", nt='" + nt + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }
